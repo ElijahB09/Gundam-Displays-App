@@ -1,7 +1,7 @@
 {
     "name": "Gundam Display App",
     "short_name": "Displays",
-    "start_url": "/",
+    "start_url": "/index.html",
     "icons": [
         {
             "src": "icons/manifest-icon-192.maskable.png",
@@ -30,6 +30,6 @@
     ],
     "theme_color": "#000000",
     "background_color": "#FFFFFF",
-    "display": "fullscreen",
-    "orientation": "portrait"
+    "display": "standalone",
+    "orientation": "portrait-primary"
 }
