@@ -8,10 +8,10 @@ const f91ToggleOffBtn = document.getElementById("f91ToggleOff");
 f91ToggleOffBtn.addEventListener("click", ledOff("f91"), false);
 
 const unicornToggleOnBtn = document.getElementById("unicornToggleOn");
-f91ToggleOnBtn.addEventListener("click", ledOn("unicorn"), false);
+unicornToggleOnBtn.addEventListener("click", ledOn("unicorn"), false);
 
 const unicornToggleOffBtn = document.getElementById("unicornToggleOff");
-f91ToggleOffBtn.addEventListener("click", ledOff("unicorn"), false);
+unicornToggleOffBtn.addEventListener("click", ledOff("unicorn"), false);
 
 function ledOn(gundam_name) {
     switch(gundam_name) {
