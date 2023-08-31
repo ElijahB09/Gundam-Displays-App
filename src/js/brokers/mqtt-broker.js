@@ -17,27 +17,35 @@ const mqtt = require('mqtt')
     */
 const url = `mqtt://${process.env.PI_MQTT_BROKER}:1883`
 
-// Create an MQTT client instance
-const options = {
-  // Clean session
-  clean: true,
-  connectTimeout: 4000,
-  // Authentication
-  clientId: 'emqx_test',
-  username: 'emqx_test',
-  password: 'emqx_test',
+const clientsToBuild = [
+  {name: "f91", topic: "gundam/uc/f91/f91gundam"},
+  {name: "unicorn", topic: "gundam/uc/unicorn/unicorngundam"}
+]
+
+const secretMapping = {
+  f91: "GUNDAM_F91_PASSWORD",
+  unicorn: "GUNDAM_UNICORN_PASSWORD",
 }
-const client  = mqtt.connect(url, options)
-client.on('connect', function () {
-  console.log('Connected')
-  // Subscribe to a topic
-  client.subscribe('test', function (err) {
-    if (!err) {
-      // Publish a message to a topic
-      client.publish('test', 'Hello mqtt')
-    }
+
+clientsToBuild.forEach((item) => {
+  var secretKey = secretMapping[item.name]
+  const options = {
+    clean: true,
+    connectTimeout: 4000,
+    clientId: 'mqtt_client_frontend_' + item.name,
+    username: item.name,
+    password: process.env[secretKey],
+  }
+  const client  = mqtt.connect(url, options)
+  client.on('connect', function () {
+    console.log('Connected')
+    client.subscribe(`${item.topic}`, function (err) {
+      if (!err) {
+        client.publish(`${item.topic}`, 'activate')
+      }
+    })
   })
-})
+});
 
 // Receive messages
 client.on('message', function (topic, message) {
