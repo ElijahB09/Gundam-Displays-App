@@ -24,8 +24,8 @@ function subClientsToBroker() {
     const options = {
       clean: true,
       connectTimeout: 4000,
-      clientId: 'mqtt_client_frontend_' + item.name,
-      username: item.name,
+      clientId: 'mqtt_client_' + item.name + '_frontend',
+      username: item.name + '_frontend',
       password: process.env[secretKey],
     }
     const client  = mqtt.connect(url, options)
