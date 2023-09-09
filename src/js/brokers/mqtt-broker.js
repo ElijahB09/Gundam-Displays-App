@@ -5,7 +5,7 @@ body.addEventListener('load', subClientsToBroker(), false);
 
 function subClientsToBroker() {
   //EMQX's default port for mqtt connections is 1883, while for mqtts it is 8883.
-  const url = `mqtt://${import.meta.env.VITE_PI_MQTT_BROKER}:1883`
+  const url = `ws://${import.meta.env.VITE_PI_MQTT_BROKER}:8083`
 
   const clientsToBuild = [
     {name: "f91", topic: "gundam/uc/f91/f91gundam"},
@@ -21,11 +21,22 @@ function subClientsToBroker() {
     }
 
     const options = {
+      keepalive: 60,
+      protocolId: 'MQTT',
+      protocolVersion: 5,
       clean: true,
       connectTimeout: 4000,
       clientId: 'mqtt_client_' + item.name + '_frontend',
       username: item.name + '_frontend',
       password: user_password,
+      reconnectPeriod: 1000,
+      connectTimeout: 30 * 1000,
+      will: {
+        topic: 'WillMsg',
+        payload: 'Connection Closed abnormally..!',
+        qos: 0,
+        retain: false
+      },
     }
     const client  = mqtt.connect(url, options)
     client.on('connect', function () {
