@@ -10,6 +10,8 @@
     "tailwind": "npx tailwindcss -i ./src/css/style.css -o ./dist/css/output.css --watch"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "rollup-plugin-polyfill-node": "^0.12.0",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"
   },
@@ -18,7 +20,7 @@
     "dotenv": "^16.3.1",
     "emitter-io": "^1.39.0",
     "flowbite": "^1.8.1",
-    "mqtt": "^5.0.3",
+    "mqtt": "^5.0.5",
     "tw-elements": "^1.0.0-beta3"
   }
 }
