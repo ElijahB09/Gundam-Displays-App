@@ -20,13 +20,13 @@ const options = {
   rejectUnauthorized: false
 }
 
-const client = mqtt.connect(host, options);
+export const client = mqtt.connect(host, options);
 
 client.on("connect", () => {
   console.log("Connected : " + clientId);
   client.subscribe("gundam/uc", (err) => {
     if (!err) {
-      client.publish("gundam/uc", "Hello mqtt");
+      client.publish("gundam/uc", "Connection to gundam/uc: CHECK");
     }
   });
 });
