@@ -1,4 +1,4 @@
-import * as mqtt from 'mqtt/dist/mqtt.min'
+import mqtt from 'mqtt'
 
 // Create a client instance
 const clientId = "gundamFrontend";
